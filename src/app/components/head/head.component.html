@@ -1,0 +1,14 @@
+<div class="container-fluid page-header">
+    <div class="container">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 400px">
+            <h3 class="display-4 text-white text-uppercase">{{pageName}}</h3>
+            <div class="d-inline-flex text-white">
+                <p class="m-0 text-uppercase"><a class="text-white" href="" routerLink="/">Ana Sayfa</a></p>
+                <i class="fa fa-angle-double-right pt-1 px-3"></i>
+                @for(route of routes; track route){
+                    <p class="m-0 text-uppercase">{{route}}</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>
