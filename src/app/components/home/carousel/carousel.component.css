@@ -1,0 +1,4 @@
+.carousel-caption {
+    background-color: rgba(0, 0, 0, 0); /* Fully transparent background */
+    /* Alternatively, you can use rgba(0, 0, 0, 0.5) for a semi-transparent background */
+}
