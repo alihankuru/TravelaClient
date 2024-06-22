@@ -1,5 +1,5 @@
 export class AboutModel {
-    id: number = 0;
+    aboutId: number = 0;
     title: string = "";
     description: string = "";
     imageUrl1: string = "";

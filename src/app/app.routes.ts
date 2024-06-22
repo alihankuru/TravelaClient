@@ -8,6 +8,7 @@ import { PackageComponent } from './components/package/package.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { AdminlayoutsComponent } from './components/adminlayouts/adminlayouts.component';
 import { AdminhomeComponent } from './components/adminhome/adminhome.component';
+import { AdminaboutComponent } from './components/admin/adminabout/adminabout.component';
 
 export const routes: Routes = [
     {
@@ -72,5 +73,14 @@ export const routes: Routes = [
                 component:HomeComponent
             }
         ]
+    },{
+      path: 'adminabout',
+      component: AdminlayoutsComponent,
+      children: [
+        {
+          path: '',
+          component: AdminaboutComponent
+        }
+      ]
     }
 ];

@@ -1,0 +1,135 @@
+<app-blank pageName="Hakkımızda" [routes]="['Hakkımızda']">
+    <app-section sectionTitle="Hakkımızda">
+        <div class="form-group row">
+            <div class="col-9">
+                <button class="btn btn-dark" data-toggle="modal" data-target="#createModal">
+                    <!-- <i class="fa-solid fa-plus me-1"></i> -->
+                    Hakkımızda Ekle
+                </button>
+            </div>
+
+            <div class="col-3">
+                <input type="search" class="form-control" placeholder="Aranacak değer girin">
+
+            </div>
+        </div>
+
+        <div class="form-group mt-2">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Başlık</th>
+                        <th>Açıklama</th>
+                        <th>Url1</th>
+                        <th>Url2</th>
+                        <th>Url3</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr *ngFor="let about of abouts">
+                      <td>{{ about.aboutId }}</td>
+                      <td>{{ about.title }}</td>
+                      <td>{{ about.description }}</td>
+                      <td><img [src]="about.imageUrl1" alt="Image 1" style="max-width: 100px;"></td>
+                      <td><img [src]="about.imageUrl2" alt="Image 2" style="max-width: 100px;"></td>
+                      <td><img [src]="about.imageUrl3" alt="Image 3" style="max-width: 100px;"></td>
+                      <td>
+                        <button data-toggle="modal" data-target="#updateModal" (click)="get(about)" class="btn btn-outline-primary btn-sm">
+                          <i class="fa-solid fa-edit me-1"></i>Düzenle
+                        </button>
+                        <button (click)="onDeleteAbout(about.aboutId)" class="btn btn-outline-danger btn-sm">
+                          <i class="fa-solid fa-trash me-1"></i>Sil
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+            </table>
+        </div>
+
+    </app-section>
+</app-blank>
+
+<!-- Create Modal -->
+  <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Modal title</h5>
+          <button type="button" #createModalCloseBtn class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form #createForm="ngForm" (ngSubmit)="create(createForm)">
+            <div class="modal-body">
+                 <div class="form-group">
+                    <label>Başlık</label>
+                    <input type="text" [(ngModel)]="createModel.title" class="form-control" name="title">
+                 </div>
+                 <div class="form-group">
+                    <label>Açıklama</label>
+                    <input type="text" [(ngModel)]="createModel.description" class="form-control" name="description">
+                 </div>
+                 <div class="form-group">
+                    <label>Image Url1</label>
+                    <input type="text" [(ngModel)]="createModel.imageUrl1" class="form-control" name="imageUrl1">
+                 </div>
+                 <div class="form-group">
+                    <label>Image Url2</label>
+                    <input type="text" [(ngModel)]="createModel.imageUrl2" class="form-control" name="imageUrl2">
+                 </div>
+                 <div class="form-group">
+                    <label>Image Url3</label>
+                    <input type="text" [(ngModel)]="createModel.imageUrl3" class="form-control" name="imageUrl3">
+                 </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-dark">Kaydet</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+<!-- updateModal -->
+  <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Modal title</h5>
+          <button type="button" #updateModalCloseBtn class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form #updateForm="ngForm" (ngSubmit)="update(updateForm)">
+            <div class="modal-body">
+                 <div class="form-group">
+                    <label>Başlık</label>
+                    <input type="text" [(ngModel)]="updateModel.title" class="form-control" name="updateTitle">
+                 </div>
+                 <div class="form-group">
+                    <label>Açıklama</label>
+                    <input type="text" [(ngModel)]="updateModel.description" class="form-control" name="updateDescription">
+                 </div>
+                 <div class="form-group">
+                    <label>Image Url1</label>
+                    <input type="text" [(ngModel)]="updateModel.imageUrl1" class="form-control" name="updateImageUrl1">
+                 </div>
+                 <div class="form-group">
+                    <label>Image Url2</label>
+                    <input type="text" [(ngModel)]="updateModel.imageUrl2" class="form-control" name="updateImageUrl2">
+                 </div>
+                 <div class="form-group">
+                    <label>Image Url3</label>
+                    <input type="text" [(ngModel)]="updateModel.imageUrl3" class="form-control" name="updateImageUrl3">
+                 </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-dark">Güncelle</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>

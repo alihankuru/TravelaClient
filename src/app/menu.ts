@@ -15,6 +15,13 @@ export const Menus: MenuModel[]=[
         subMenus: []
     },
     {
+        name: "Hakkımızda",
+        icon: "far fa-solid fa-home",
+        url: "/adminabout",
+        isTitle: false,
+        subMenus: []
+    },
+    {
         name: "Ana Group",
         icon: "far fa-solid fa-trowel-bricks",
         url: "",
