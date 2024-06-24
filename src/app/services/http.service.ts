@@ -12,7 +12,7 @@ import { AboutModel } from '../model/about.model';
 export class HttpService {
 
   private apiUrl = 'https://localhost:7108/api/Abouts';
-
+  private apiUrl1 = 'https://localhost:7108/api/';
   constructor(
     private http: HttpClient,
 
@@ -20,7 +20,7 @@ export class HttpService {
   ) { }
 
 
-  post<T>(apiUrl: string, body: any, callBack: (res: T) => void, errorCallBack?: () => void) {
+  post1<T>(apiUrl: string, body: any, callBack: (res: T) => void, errorCallBack?: () => void) {
     this.http.post<ResultModel<T>>(`${api}/${apiUrl}`, body).subscribe({
       next: (res) => {
         if (res.data) {
@@ -36,10 +36,54 @@ export class HttpService {
     });
   }
   
+  post<T>(apiUrl: string, body: any, callBack: (res: T) => void, errorCallBack?: () => void) {
+    this.http.post<ResultModel<T>>(`${api}/${apiUrl}`, body, {
+      headers: {
+        "Authorization": "Bearer " + "this.auth.token"
+      }
+    }).subscribe({
+      next: (res) => {
+        if (res.data) {
+          callBack(res.data);
+        }
+      },
+      error: (err: HttpErrorResponse) => {
+        this.error.errorHandler(err);
+        if (errorCallBack) {
+          errorCallBack();
+        }
+      }
+    });
+  }
 
 
   getAboutList(): Observable<any[]> {
     return this.http.post<any[]>(`${this.apiUrl}/AboutList`, {});
+
+  }
+
+  getFeatureList(): Observable<any[]> {
+    return this.http.post<any[]>(`${this.apiUrl1}Features/FeatureList`, {});
+
+  }
+
+  getDestinationList(): Observable<any[]> {
+    return this.http.post<any[]>(`${this.apiUrl1}Destination/DestinationList`, {});
+
+  }
+
+  getServiceList(): Observable<any[]> {
+    return this.http.post<any[]>(`${this.apiUrl1}Services/ServiceList`, {});
+
+  }
+
+  getPackageList(): Observable<any[]> {
+    return this.http.post<any[]>(`${this.apiUrl1}Packages/PackageList`, {});
+
+  }
+
+  getTeamList(): Observable<any[]> {
+    return this.http.post<any[]>(`${this.apiUrl1}Guides/GuideList`, {});
 
   }
 

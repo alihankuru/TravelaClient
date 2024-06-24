@@ -3,6 +3,7 @@ import { SharedModule } from '../../modules/shared.module';
 import { HttpService } from '../../../services/http.service';
 import { AboutModel } from '../../../model/about.model';
 import { NgForm } from '@angular/forms';
+import { SwalService } from '../../../services/swal.service';
 
 @Component({
   selector: 'app-adminabout',
@@ -22,7 +23,8 @@ export class AdminaboutComponent implements OnInit {
   updateModel:AboutModel=new AboutModel();
 
   constructor(
-    private http: HttpService
+    private http: HttpService,
+    private swal: SwalService
   ) {}
 
   ngOnInit(): void {
@@ -55,21 +57,23 @@ export class AdminaboutComponent implements OnInit {
     });
   }
 
-  create(form:NgForm){
+
+  create(form: NgForm){
     if(form.valid){
       this.http.post<string>("Abouts",this.createModel,(res)=>{
+        this.swal.callToast(res);
         this.createModel=new AboutModel();
-        this.createModalCloseBtn.nativeElement.click();
-        this.getAboutList();
+        this.createModalCloseBtn?.nativeElement.click();
+        this.getAll();
       });
     }
   }
-
 
   onDeleteAbout(id: number): void {
     this.http.deleteAbout(id).subscribe(
       () => {
         console.log('About item deleted successfully');
+
         this.getAboutList();
       },
       error => {
@@ -79,32 +83,23 @@ export class AdminaboutComponent implements OnInit {
     );
   }
 
-  updateAbout(): void {
-    this.http.updateAbout(this.updateModel)
-      .subscribe(
-        response => {
-          console.log('Update successful', response); // Handle success as per your application's needs
-          // Optionally, reset form or perform any additional actions upon success
-        },
-        error => {
-          console.error('Update failed', error); // Handle errors as per your application's needs
-        }
-      );
-  }
- 
 
   get(model:AboutModel){
     this.updateModel={...model};
   }
 
-  update(form:NgForm){
-    if(form.valid){
-      this.http.post<string>("Abouts/Update",this.updateModel,(res)=>{
-
-        this.updateModalCloseBtn.nativeElement.click();
+  update(form: NgForm): void {
+    if (form.valid) {
+      this.http.post<string>("Abouts/Update", this.updateModel, (res) => {
+        console.log('Update successful', res); // Debugging log
+        this.updateModel = new AboutModel();
+        this.updateModalCloseBtn.nativeElement.click(); // Ensure this references the correct button
         this.getAboutList();
       });
     }
   }
 
+
+
+  
 }

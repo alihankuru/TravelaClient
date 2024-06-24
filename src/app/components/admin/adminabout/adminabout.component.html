@@ -3,7 +3,7 @@
         <div class="form-group row">
             <div class="col-9">
                 <button class="btn btn-dark" data-toggle="modal" data-target="#createModal">
-                    <!-- <i class="fa-solid fa-plus me-1"></i> -->
+                    <i class="fa-solid fa-plus me-1"></i>
                     Hakkımızda Ekle
                 </button>
             </div>
@@ -57,7 +57,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Modal title</h5>
+          <h5 class="modal-title">Yeni Kayıt Oluştur</h5>
           <button type="button" #createModalCloseBtn class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -94,42 +94,42 @@
   </div>
 
 <!-- updateModal -->
-  <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Modal title</h5>
-          <button type="button" #updateModalCloseBtn class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <form #updateForm="ngForm" (ngSubmit)="update(updateForm)">
-            <div class="modal-body">
-                 <div class="form-group">
-                    <label>Başlık</label>
-                    <input type="text" [(ngModel)]="updateModel.title" class="form-control" name="updateTitle">
-                 </div>
-                 <div class="form-group">
-                    <label>Açıklama</label>
-                    <input type="text" [(ngModel)]="updateModel.description" class="form-control" name="updateDescription">
-                 </div>
-                 <div class="form-group">
-                    <label>Image Url1</label>
-                    <input type="text" [(ngModel)]="updateModel.imageUrl1" class="form-control" name="updateImageUrl1">
-                 </div>
-                 <div class="form-group">
-                    <label>Image Url2</label>
-                    <input type="text" [(ngModel)]="updateModel.imageUrl2" class="form-control" name="updateImageUrl2">
-                 </div>
-                 <div class="form-group">
-                    <label>Image Url3</label>
-                    <input type="text" [(ngModel)]="updateModel.imageUrl3" class="form-control" name="updateImageUrl3">
-                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-dark">Güncelle</button>
-            </div>
-        </form>
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Güncelleme Sayfası</h5>
+        <button type="button" #updateModalCloseBtn class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
+      <form #updateForm="ngForm" (ngSubmit)="update(updateForm)">
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Başlık</label>
+            <input type="text" [(ngModel)]="updateModel.title" class="form-control" name="updateTitle">
+          </div>
+          <div class="form-group">
+            <label>Açıklama</label>
+            <input type="text" [(ngModel)]="updateModel.description" class="form-control" name="updateDescription">
+          </div>
+          <div class="form-group">
+            <label>Image Url1</label>
+            <input type="text" [(ngModel)]="updateModel.imageUrl1" class="form-control" name="updateImageUrl1">
+          </div>
+          <div class="form-group">
+            <label>Image Url2</label>
+            <input type="text" [(ngModel)]="updateModel.imageUrl2" class="form-control" name="updateImageUrl2">
+          </div>
+          <div class="form-group">
+            <label>Image Url3</label>
+            <input type="text" [(ngModel)]="updateModel.imageUrl3" class="form-control" name="updateImageUrl3">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-dark">Güncelle</button>
+        </div>
+      </form>
     </div>
   </div>
+</div>
