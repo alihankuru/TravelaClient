@@ -1,25 +1,25 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { SharedModule } from '../../modules/shared.module';
-import { FeatureModel } from '../../../model/feature.model';
+import { DestinationModel } from '../../../model/destination.model';
 import { HttpService } from '../../../services/http.service';
 import { SwalService } from '../../../services/swal.service';
 import { NgForm } from '@angular/forms';
 
 @Component({
-  selector: 'app-adminfeature',
+  selector: 'app-admindestination',
   standalone: true,
   imports: [SharedModule],
-  templateUrl: './adminfeature.component.html',
-  styleUrl: './adminfeature.component.css'
+  templateUrl: './admindestination.component.html',
+  styleUrl: './admindestination.component.css'
 })
-export class AdminfeatureComponent implements OnInit{
-  features: FeatureModel[]=[];
+export class AdmindestinationComponent implements OnInit {
+  destinations: DestinationModel[]=[];
 
   @ViewChild('createModalCloseBtn') createModalCloseBtn!: ElementRef<HTMLButtonElement>;
   @ViewChild('updateModalCloseBtn') updateModalCloseBtn!: ElementRef<HTMLButtonElement>;
 
-  createModel:FeatureModel=new FeatureModel();
-  updateModel:FeatureModel=new FeatureModel();
+  createModel:DestinationModel=new DestinationModel();
+  updateModel:DestinationModel=new DestinationModel();
 
   constructor(
     private http: HttpService,
@@ -27,19 +27,19 @@ export class AdminfeatureComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    this.getFeatureList();
+    this.getDestinationList();
   
   }
 
   
   getAll() {
-    const apiUrl = "Features/FeatureList";
+    const apiUrl = "Destination/DestinationList";
     const body = {}; // Assuming your API doesn't require a body for this request
   
-    this.http.post<FeatureModel[]>(apiUrl, body,
-      (res: FeatureModel[]) => {
+    this.http.post<DestinationModel[]>(apiUrl, body,
+      (res: DestinationModel[]) => {
         console.log(res);  // Log the response to the console
-        this.features = res; // Assign the response to your component's property
+        this.destinations = res; // Assign the response to your component's property
       },
       () => {
         console.error("Error occurred while fetching abouts."); // Optional: Handle error callback
@@ -49,31 +49,31 @@ export class AdminfeatureComponent implements OnInit{
 
 
 
-  getFeatureList(): void {
-    this.http.getFeatureList().subscribe(data => {
+  getDestinationList(): void {
+    this.http.getDestinationList().subscribe(data => {
       console.log('Data received:', data);
-      this.features = data;
+      this.destinations = data;
     });
   }
 
 
   create(form: NgForm){
     if(form.valid){
-      this.http.post<string>("Features",this.createModel,(res)=>{
+      this.http.post<string>("Destination",this.createModel,(res)=>{
         this.swal.callToast(res);
-        this.createModel=new FeatureModel();
+        this.createModel=new DestinationModel();
         this.createModalCloseBtn?.nativeElement.click();
         this.getAll();
       });
     }
   }
 
-  onDeleteFeature(id: number): void {
-    this.http.deleteFeature(id).subscribe(
+  onDeleteDestination(id: number): void {
+    this.http.deleteDestination(id).subscribe(
       () => {
         console.log('Feature item deleted successfully');
 
-        this.getFeatureList();
+        this.getDestinationList();
       },
       error => {
         console.error('Failed to delete Feature item', error);
@@ -83,19 +83,18 @@ export class AdminfeatureComponent implements OnInit{
   }
 
 
-  get(model:FeatureModel){
+  get(model:DestinationModel){
     this.updateModel={...model};
   }
 
   update(form: NgForm): void {
     if (form.valid) {
-      this.http.post<string>("Features/Update", this.updateModel, (res) => {
+      this.http.post<string>("Destination/Update", this.updateModel, (res) => {
         console.log('Update successful', res); // Debugging log
-        this.updateModel = new FeatureModel();
+        this.updateModel = new DestinationModel();
         this.updateModalCloseBtn.nativeElement.click(); // Ensure this references the correct button
-        this.getFeatureList();
+        this.getDestinationList();
       });
     }
   }
-
 }

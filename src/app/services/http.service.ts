@@ -87,6 +87,46 @@ export class HttpService {
 
   }
 
+  getCarouselList(): Observable<any[]> {
+    return this.http.post<any[]>(`${this.apiUrl1}Carousels/CarouselList`, {});
+
+  }
+
+  getFooterList(): Observable<any[]> {
+    return this.http.post<any[]>(`${this.apiUrl1}Footers/FooterList`, {});
+
+  }
+
+  deleteFeature(id: number): Observable<any> {
+    const url = `${this.apiUrl1}Features/DeleteFeature/${id}`;
+    // Make sure to not set Content-Type header for DELETE requests
+    return this.http.delete(url);
+  }
+
+  deleteDestination(id: number): Observable<any> {
+    const url = `${this.apiUrl1}Destination/DeleteDestination/${id}`;
+    // Make sure to not set Content-Type header for DELETE requests
+    return this.http.delete(url);
+  }
+
+  deleteService(id: number): Observable<any> {
+    const url = `${this.apiUrl1}Services/DeleteService/${id}`;
+    // Make sure to not set Content-Type header for DELETE requests
+    return this.http.delete(url);
+  }
+
+  deletePackage(id: number): Observable<any> {
+    const url = `${this.apiUrl1}Packages/DeletePackage/${id}`;
+    // Make sure to not set Content-Type header for DELETE requests
+    return this.http.delete(url);
+  }
+
+  deleteTeam(id: number): Observable<any> {
+    const url = `${this.apiUrl1}Guides/DeleteGuide/${id}`;
+    // Make sure to not set Content-Type header for DELETE requests
+    return this.http.delete(url);
+  }
+
   deleteAbout(id: number): Observable<any> {
     const url = `${this.apiUrl}/DeleteAbout/${id}`;
     // Make sure to not set Content-Type header for DELETE requests
@@ -101,5 +141,6 @@ export class HttpService {
         })
       );
   }
+  
   
 }

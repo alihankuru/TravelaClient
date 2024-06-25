@@ -1,0 +1,182 @@
+<app-blank pageName="Paketler" [routes]="['Paketler']">
+    <app-section sectionTitle="Paketler">
+        <div class="form-group row">
+            <div class="col-9">
+                <button class="btn btn-dark" data-toggle="modal" data-target="#createModal">
+                    <i class="fa-solid fa-plus me-1"></i>
+                    Paket Ekle
+                </button>
+            </div>
+
+            <div class="col-3">
+                <input type="search" class="form-control" placeholder="Aranacak değer girin">
+
+            </div>
+        </div>
+
+        <div class="form-group mt-2">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Ülke</th>
+                        <th>Resim Url</th>
+                        <th>Gün</th>
+                        <th>Yolcu Sayısı</th>
+                        <th>Başlık</th>
+                        <th>Puan</th>
+                        <th>Yorum Sayısı</th>
+                        <th>Fiyat</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr *ngFor="let package of packages">
+                      <td>{{ package.packageId }}</td>
+                      <td>{{ package.countryName }}</td>
+                      <td><img [src]="package.imageUrl" alt="Image 1" style="max-width: 100px;"></td>
+                      <td>{{ package.day }}</td>
+                      <td>{{ package.personCount }}</td>
+                      <td>{{ package.title }}</td>
+                      <td>{{ package.review }}</td>
+                      <td>{{ package.commentCount }}</td>
+                      <td>{{ package.price }}</td>
+                      <td>
+                        <button data-toggle="modal" data-target="#updateModal" (click)="get(package)" class="btn btn-outline-primary btn-sm">
+                          <i class="fa-solid fa-edit me-1"></i>Düzenle
+                        </button>
+                        <button (click)="onDeletePackage(package.packageId)" class="btn btn-outline-danger btn-sm">
+                          <i class="fa-solid fa-trash me-1"></i>Sil
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+            </table>
+        </div>
+
+    </app-section>
+</app-blank>
+
+<!-- Create Modal -->
+  <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Yeni Kayıt Oluştur</h5>
+          <button type="button" #createModalCloseBtn class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form #createForm="ngForm" (ngSubmit)="create(createForm)">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Ülke</label>
+                    <input type="text" [(ngModel)]="createModel.countryName" class="form-control" name="countryName">
+                 </div>
+
+                 <div class="form-group">
+                    <label>Resim Url</label>
+                    <input type="text" [(ngModel)]="createModel.imageUrl" class="form-control" name="imageUrl">
+                 </div>
+
+                 <div class="form-group">
+                    <label>Gün Sayısı</label>
+                    <input type="text" [(ngModel)]="createModel.day" class="form-control" name="day">
+                 </div>
+
+                 <div class="form-group">
+                    <label>Kişi Sayısı</label>
+                    <input type="text" [(ngModel)]="createModel.personCount" class="form-control" name="personCount">
+                 </div>
+
+                 <div class="form-group">
+                    <label>Başlık</label>
+                    <input type="text" [(ngModel)]="createModel.title" class="form-control" name="title">
+                 </div>
+
+                 <div class="form-group">
+                    <label>Puan</label>
+                    <input type="text" [(ngModel)]="createModel.review" class="form-control" name="review">
+                 </div>
+
+                 <div class="form-group">
+                    <label>Yorum Sayısı</label>
+                    <input type="text" [(ngModel)]="createModel.commentCount" class="form-control" name="commentCount">
+                 </div>
+
+                 <div class="form-group">
+                    <label>Fiyat</label>
+                    <input type="text" [(ngModel)]="createModel.price" class="form-control" name="price">
+                 </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-dark">Kaydet</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+<!-- updateModal -->
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Güncelleme Sayfası</h5>
+        <button type="button" #updateModalCloseBtn class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form #updateForm="ngForm" (ngSubmit)="update(updateForm)">
+        <div class="modal-body">
+      
+          <div class="form-group">
+            <label>Ülke</label>
+            <input type="text" [(ngModel)]="updateModel.countryName" class="form-control" name="updateCountryName">
+         </div>
+
+         <div class="form-group">
+            <label>Resim Url</label>
+            <input type="text" [(ngModel)]="updateModel.imageUrl" class="form-control" name="updateImageUrl">
+         </div>
+
+         <div class="form-group">
+            <label>Gün Sayısı</label>
+            <input type="text" [(ngModel)]="updateModel.day" class="form-control" name="updateDay">
+         </div>
+
+         <div class="form-group">
+            <label>Kişi Sayısı</label>
+            <input type="text" [(ngModel)]="updateModel.personCount" class="form-control" name="updatePersonCount">
+         </div>
+
+         <div class="form-group">
+            <label>Başlık</label>
+            <input type="text" [(ngModel)]="updateModel.title" class="form-control" name="updateTitle">
+         </div>
+
+         <div class="form-group">
+            <label>Puan</label>
+            <input type="text" [(ngModel)]="updateModel.review" class="form-control" name="updateReview">
+         </div>
+
+         <div class="form-group">
+            <label>Yorum Sayısı</label>
+            <input type="text" [(ngModel)]="updateModel.commentCount" class="form-control" name="updateCommentCount">
+         </div>
+
+         <div class="form-group">
+            <label>Fiyat</label>
+            <input type="text" [(ngModel)]="updateModel.price" class="form-control" name="updatePrice">
+         </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-dark">Güncelle</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

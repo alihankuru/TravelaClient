@@ -9,6 +9,11 @@ import { ContactComponent } from './components/contact/contact.component';
 import { AdminlayoutsComponent } from './components/adminlayouts/adminlayouts.component';
 import { AdminhomeComponent } from './components/adminhome/adminhome.component';
 import { AdminaboutComponent } from './components/admin/adminabout/adminabout.component';
+import { AdminfeatureComponent } from './components/admin/adminfeature/adminfeature.component';
+import { AdmindestinationComponent } from './components/admin/admindestination/admindestination.component';
+import { AdminserviceComponent } from './components/admin/adminservice/adminservice.component';
+import { AdminpackageComponent } from './components/admin/adminpackage/adminpackage.component';
+import { AdminteamComponent } from './components/admin/adminteam/adminteam.component';
 
 export const routes: Routes = [
     {
@@ -80,6 +85,54 @@ export const routes: Routes = [
         {
           path: '',
           component: AdminaboutComponent
+        }
+      ]
+    },{
+      path: 'adminfeature',
+      component: AdminlayoutsComponent,
+      children: [
+        {
+          path: '',
+          component: AdminfeatureComponent
+        }
+      ]
+    },{
+      path: 'admindestination',
+      component: AdminlayoutsComponent,
+      children: [
+        {
+          path: '',
+          component: AdmindestinationComponent
+        }
+      ]
+    },
+    {
+      path: 'adminservice',
+      component: AdminlayoutsComponent,
+      children: [
+        {
+          path: '',
+          component: AdminserviceComponent
+        }
+      ]
+    },
+    {
+      path: 'adminpackage',
+      component: AdminlayoutsComponent,
+      children: [
+        {
+          path: '',
+          component: AdminpackageComponent
+        }
+      ]
+    },
+    {
+      path: 'adminteam',
+      component: AdminlayoutsComponent,
+      children: [
+        {
+          path: '',
+          component: AdminteamComponent
         }
       ]
     }

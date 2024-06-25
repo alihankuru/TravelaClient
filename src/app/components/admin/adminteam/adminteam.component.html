@@ -1,10 +1,10 @@
-<app-blank pageName="Özellikler" [routes]="['Özellikler']">
-    <app-section sectionTitle="Özellikler">
+<app-blank pageName="Rehberler" [routes]="['Rehberler']">
+    <app-section sectionTitle="Rehberler">
         <div class="form-group row">
             <div class="col-9">
                 <button class="btn btn-dark" data-toggle="modal" data-target="#createModal">
                     <i class="fa-solid fa-plus me-1"></i>
-                    Özellik Ekle
+                    Rehber Ekle
                 </button>
             </div>
 
@@ -19,24 +19,26 @@
                 <thead>
                     <tr>
                         <th>#</th>
+                        <th>İsim Soyisim</th>
                         <th>Başlık</th>
-                        <th>Açıklama</th>
-                        <th>IconUrl</th>
+                        <th>İmage Url</th>
                         <th>İşlemler</th>
                     </tr>
                 </thead>
                 <tbody>
                     
-                    <tr *ngFor="let feature of features">
-                      <td>{{ feature.featureId }}</td>
-                      <td>{{ feature.title }}</td>
-                      <td>{{ feature.description }}</td>
-                      <td>{{ feature.iconUrl }}</td>
+                    <tr *ngFor="let team of teams">
+                      <td>{{ team.guideId }}</td>
+                      <td>{{ team.name }}</td>
+                      <td>{{ team.title }}</td>
+                      <td><img [src]="team.imageUrl" alt="Image 1" style="max-width: 100px;"></td>
+                     
+
                       <td>
-                        <button data-toggle="modal" data-target="#updateModal" (click)="get(feature)" class="btn btn-outline-primary btn-sm">
+                        <button data-toggle="modal" data-target="#updateModal" (click)="get(team)" class="btn btn-outline-primary btn-sm">
                           <i class="fa-solid fa-edit me-1"></i>Düzenle
                         </button>
-                        <button (click)="onDeleteFeature(feature.featureId)" class="btn btn-outline-danger btn-sm">
+                        <button (click)="onDeleteTeam(team.guideId)" class="btn btn-outline-danger btn-sm">
                           <i class="fa-solid fa-trash me-1"></i>Sil
                         </button>
                       </td>
@@ -65,12 +67,12 @@
                     <input type="text" [(ngModel)]="createModel.title" class="form-control" name="title">
                  </div>
                  <div class="form-group">
-                    <label>Açıklama</label>
-                    <input type="text" [(ngModel)]="createModel.description" class="form-control" name="description">
+                    <label>İsim Soyisim</label>
+                    <input type="text" [(ngModel)]="createModel.name" class="form-control" name="name">
                  </div>
                  <div class="form-group">
-                    <label>Icon Url</label>
-                    <input type="text" [(ngModel)]="createModel.iconUrl" class="form-control" name="iconUrl">
+                    <label>Image Url</label>
+                    <input type="text" [(ngModel)]="createModel.imageUrl" class="form-control" name="imageUrl">
                  </div>
                  
             </div>
@@ -99,12 +101,12 @@
             <input type="text" [(ngModel)]="updateModel.title" class="form-control" name="updateTitle">
           </div>
           <div class="form-group">
-            <label>Açıklama</label>
-            <input type="text" [(ngModel)]="updateModel.description" class="form-control" name="updateDescription">
+            <label>İsim Soyisim</label>
+            <input type="text" [(ngModel)]="updateModel.name" class="form-control" name="updateName">
           </div>
           <div class="form-group">
-            <label>Icon Url</label>
-            <input type="text" [(ngModel)]="updateModel.iconUrl" class="form-control" name="updateIconUrl">
+            <label>Image Url</label>
+            <input type="text" [(ngModel)]="updateModel.imageUrl" class="form-control" name="updateImageUrl">
           </div>
           
         </div>

@@ -1,25 +1,25 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { SharedModule } from '../../modules/shared.module';
-import { FeatureModel } from '../../../model/feature.model';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { TeamModel } from '../../../model/team.model';
 import { HttpService } from '../../../services/http.service';
 import { SwalService } from '../../../services/swal.service';
 import { NgForm } from '@angular/forms';
+import { SharedModule } from '../../modules/shared.module';
 
 @Component({
-  selector: 'app-adminfeature',
+  selector: 'app-adminteam',
   standalone: true,
   imports: [SharedModule],
-  templateUrl: './adminfeature.component.html',
-  styleUrl: './adminfeature.component.css'
+  templateUrl: './adminteam.component.html',
+  styleUrl: './adminteam.component.css'
 })
-export class AdminfeatureComponent implements OnInit{
-  features: FeatureModel[]=[];
+export class AdminteamComponent {
+  teams: TeamModel[]=[];
 
   @ViewChild('createModalCloseBtn') createModalCloseBtn!: ElementRef<HTMLButtonElement>;
   @ViewChild('updateModalCloseBtn') updateModalCloseBtn!: ElementRef<HTMLButtonElement>;
 
-  createModel:FeatureModel=new FeatureModel();
-  updateModel:FeatureModel=new FeatureModel();
+  createModel:TeamModel=new TeamModel();
+  updateModel:TeamModel=new TeamModel();
 
   constructor(
     private http: HttpService,
@@ -27,19 +27,19 @@ export class AdminfeatureComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    this.getFeatureList();
+    this.getTeamList();
   
   }
 
   
   getAll() {
-    const apiUrl = "Features/FeatureList";
+    const apiUrl = "Guides/GuideList";
     const body = {}; // Assuming your API doesn't require a body for this request
   
-    this.http.post<FeatureModel[]>(apiUrl, body,
-      (res: FeatureModel[]) => {
+    this.http.post<TeamModel[]>(apiUrl, body,
+      (res: TeamModel[]) => {
         console.log(res);  // Log the response to the console
-        this.features = res; // Assign the response to your component's property
+        this.teams = res; // Assign the response to your component's property
       },
       () => {
         console.error("Error occurred while fetching abouts."); // Optional: Handle error callback
@@ -49,31 +49,31 @@ export class AdminfeatureComponent implements OnInit{
 
 
 
-  getFeatureList(): void {
-    this.http.getFeatureList().subscribe(data => {
+  getTeamList(): void {
+    this.http.getTeamList().subscribe(data => {
       console.log('Data received:', data);
-      this.features = data;
+      this.teams = data;
     });
   }
 
 
   create(form: NgForm){
     if(form.valid){
-      this.http.post<string>("Features",this.createModel,(res)=>{
+      this.http.post<string>("Guides",this.createModel,(res)=>{
         this.swal.callToast(res);
-        this.createModel=new FeatureModel();
+        this.createModel=new TeamModel();
         this.createModalCloseBtn?.nativeElement.click();
         this.getAll();
       });
     }
   }
 
-  onDeleteFeature(id: number): void {
-    this.http.deleteFeature(id).subscribe(
+  onDeleteTeam(id: number): void {
+    this.http.deleteTeam(id).subscribe(
       () => {
         console.log('Feature item deleted successfully');
 
-        this.getFeatureList();
+        this.getTeamList();
       },
       error => {
         console.error('Failed to delete Feature item', error);
@@ -83,17 +83,17 @@ export class AdminfeatureComponent implements OnInit{
   }
 
 
-  get(model:FeatureModel){
+  get(model:TeamModel){
     this.updateModel={...model};
   }
 
   update(form: NgForm): void {
     if (form.valid) {
-      this.http.post<string>("Features/Update", this.updateModel, (res) => {
+      this.http.post<string>("Guides/Update", this.updateModel, (res) => {
         console.log('Update successful', res); // Debugging log
-        this.updateModel = new FeatureModel();
+        this.updateModel = new TeamModel();
         this.updateModalCloseBtn.nativeElement.click(); // Ensure this references the correct button
-        this.getFeatureList();
+        this.getTeamList();
       });
     }
   }

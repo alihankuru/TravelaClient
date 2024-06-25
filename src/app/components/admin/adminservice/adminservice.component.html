@@ -1,10 +1,10 @@
-<app-blank pageName="Özellikler" [routes]="['Özellikler']">
-    <app-section sectionTitle="Özellikler">
+<app-blank pageName="Servisler" [routes]="['Servisler']">
+    <app-section sectionTitle="Servisler">
         <div class="form-group row">
             <div class="col-9">
                 <button class="btn btn-dark" data-toggle="modal" data-target="#createModal">
                     <i class="fa-solid fa-plus me-1"></i>
-                    Özellik Ekle
+                    Servis Ekle
                 </button>
             </div>
 
@@ -21,22 +21,22 @@
                         <th>#</th>
                         <th>Başlık</th>
                         <th>Açıklama</th>
-                        <th>IconUrl</th>
+                        <th>Icon Url</th>
                         <th>İşlemler</th>
                     </tr>
                 </thead>
                 <tbody>
                     
-                    <tr *ngFor="let feature of features">
-                      <td>{{ feature.featureId }}</td>
-                      <td>{{ feature.title }}</td>
-                      <td>{{ feature.description }}</td>
-                      <td>{{ feature.iconUrl }}</td>
+                    <tr *ngFor="let service of services">
+                      <td>{{ service.serviceId }}</td>
+                      <td>{{ service.title }}</td>
+                      <td>{{ service.description }}</td>
+                      <td>{{ service.iconUrl }}</td>
                       <td>
-                        <button data-toggle="modal" data-target="#updateModal" (click)="get(feature)" class="btn btn-outline-primary btn-sm">
+                        <button data-toggle="modal" data-target="#updateModal" (click)="get(service)" class="btn btn-outline-primary btn-sm">
                           <i class="fa-solid fa-edit me-1"></i>Düzenle
                         </button>
-                        <button (click)="onDeleteFeature(feature.featureId)" class="btn btn-outline-danger btn-sm">
+                        <button (click)="onDeleteService(service.serviceId)" class="btn btn-outline-danger btn-sm">
                           <i class="fa-solid fa-trash me-1"></i>Sil
                         </button>
                       </td>
@@ -60,6 +60,7 @@
         </div>
         <form #createForm="ngForm" (ngSubmit)="create(createForm)">
             <div class="modal-body">
+
                  <div class="form-group">
                     <label>Başlık</label>
                     <input type="text" [(ngModel)]="createModel.title" class="form-control" name="title">
@@ -72,7 +73,7 @@
                     <label>Icon Url</label>
                     <input type="text" [(ngModel)]="createModel.iconUrl" class="form-control" name="iconUrl">
                  </div>
-                 
+                
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-dark">Kaydet</button>
@@ -103,7 +104,7 @@
             <input type="text" [(ngModel)]="updateModel.description" class="form-control" name="updateDescription">
           </div>
           <div class="form-group">
-            <label>Icon Url</label>
+            <label>Image Url1</label>
             <input type="text" [(ngModel)]="updateModel.iconUrl" class="form-control" name="updateIconUrl">
           </div>
           

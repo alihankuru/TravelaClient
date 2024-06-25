@@ -22,6 +22,41 @@ export const Menus: MenuModel[]=[
         subMenus: []
     },
     {
+        name: "Özellikler",
+        icon: "far fa-solid fa-home",
+        url: "/adminfeature",
+        isTitle: false,
+        subMenus: []
+    },
+    {
+        name: "Rotalar",
+        icon: "far fa-solid fa-home",
+        url: "/admindestination",
+        isTitle: false,
+        subMenus: []
+    }, 
+    {
+        name: "Servisler",
+        icon: "far fa-solid fa-home",
+        url: "/adminservice",
+        isTitle: false,
+        subMenus: []
+    },
+    {
+        name: "Paketler",
+        icon: "far fa-solid fa-home",
+        url: "/adminpackage",
+        isTitle: false,
+        subMenus: []
+    },
+    {
+        name: "Rehberler",
+        icon: "far fa-solid fa-home",
+        url: "/adminteam",
+        isTitle: false,
+        subMenus: []
+    },
+    {
         name: "Ana Group",
         icon: "far fa-solid fa-trowel-bricks",
         url: "",
